@@ -36,5 +36,6 @@ void	quote_count(char c, int *sq_count, int *dq_count);
 int	invalid_operator(char **input);
 // tokenization
 t_token *tokenize_input(char *input);
-
+void	found_special_char(char **input, t_token **tokens);
+void	found_word(char **input, t_token **tokens);
 #endif
