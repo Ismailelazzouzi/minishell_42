@@ -9,6 +9,7 @@ FILES = minishell \
 		syntax_checker \
 		syntax_check_utils \
 		tokenize \
+		tokenize_utils \
 
 SRCS = $(addsuffix .c, $(FILES))
 
