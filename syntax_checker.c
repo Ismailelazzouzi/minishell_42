@@ -3,13 +3,14 @@
 int	check_syntax_error(char *input)
 {
 	if (unclosed_quote(input))
-		return(ft_putstr_fd("Syntax Error : unclosed quote\n", 2), 1);
+		return (ft_putstr_fd("Syntax Error : unclosed quote\n", 2), 1);
 	if (invalid_redirection(input))
-		return(ft_putstr_fd("Syntax Error : invalid redirection\n", 2), 1);
+		return (ft_putstr_fd("Syntax Error : invalid redirection\n", 2), 1);
 	if (invalid_pipe(input))
-		return(ft_putstr_fd("Syntax Error : invalid pipe or operator\n", 2), 1);
+		return (ft_putstr_fd("Syntax Error : invalid pipe or operator\n", 2), 1);
 	if (logical_operators(input))
-		return(ft_putstr_fd("Syntax Error : || and && are not supported\n", 2), 1);
+		return (ft_putstr_fd("Syntax Error :|| and && are not supported\n", 2),
+			1);
 	return (0);
 }
 
@@ -89,8 +90,8 @@ int	logical_operators(char *input)
 	{
 		quote_count(*input, &sq_count, &dq_count);
 		if ((!(sq_count % 2) && !(dq_count % 2))
-		&& ((*input == '&' && *(input + 1) == '&')
-		|| (*input == '|' && *(input + 1) == '|')))
+			&& ((*input == '&' && *(input + 1) == '&')
+				|| (*input == '|' && *(input + 1) == '|')))
 			return (1);
 		input++;
 	}

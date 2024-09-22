@@ -16,7 +16,7 @@ t_token	*check_tokenize(char *input)
 	return (tokens);
 }
 
-void	main_loop()
+void	main_loop(void)
 {
 	char	*input;
 	t_token	*tokens;

@@ -5,7 +5,7 @@
 # include <readline/history.h>
 # include <stdlib.h>
 # include <string.h>
-#include "./libft/libft.h"
+# include "./libft/libft.h"
 
 typedef enum e_typetoken
 {
@@ -25,17 +25,17 @@ typedef struct s_token
 }	t_token;
 
 // Input Validation I-V
-int	check_syntax_error(char *input);
-int	unclosed_quote(char *input);
-int	invalid_redirection(char *input);
-int	invalid_pipe(char *input);
-int	logical_operators(char *input);
+int		check_syntax_error(char *input);
+int		unclosed_quote(char *input);
+int		invalid_redirection(char *input);
+int		invalid_pipe(char *input);
+int		logical_operators(char *input);
 //I-V utils
 char	*skip_spaces(char *input);
 void	quote_count(char c, int *sq_count, int *dq_count);
-int	invalid_operator(char **input);
+int		invalid_operator(char **input);
 // tokenization T
-t_token *tokenize_input(char *input);
+t_token	*tokenize_input(char *input);
 void	found_special_char(char **input, t_token **tokens);
 void	found_word(char **input, t_token **tokens);
 // T utils
