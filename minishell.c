@@ -18,8 +18,9 @@ t_token	*check_tokenize(char *input)
 
 void	main_loop(void)
 {
-	char	*input;
-	t_token	*tokens;
+	char		*input;
+	t_token		*tokens;
+	t_ast_node	*ast;
 
 	while (1)
 	{
@@ -29,6 +30,7 @@ void	main_loop(void)
 		if (*input)
 			add_history(input);
 		tokens = check_tokenize(input);
+		ast = parse(&tokens);
 	}
 }
 
