@@ -56,7 +56,7 @@ void	quote_status(char c, int *quoted, char *quote);
 // Parsing
 t_ast_node	*parse(t_token **tokens);
 t_ast_node	*parse_pipe(t_token **tokens);
-t_ast_node	*parse_redirection(t_token **tokens); // in progress
+t_ast_node	*parse_redirection(t_token **tokens);
 t_ast_node	*create_file_node(t_token *token);
 t_ast_node	*parse_command(t_token **tokens);
 // Parsing utils

@@ -32,6 +32,35 @@ t_ast_node	*create_file_node(t_token *token)
 	return (file_node);
 }
 
+t_ast_node	*parse_redirection(t_token **tokens)
+{
+	t_ast_node	*red_node;
+	t_token		*next_token;
+	t_token		*placeholder;
+
+	if (!*tokens)
+		return (NULL);
+	placeholder = *tokens;
+	if ((*tokens)->token_type >= REDIRECTION_IN
+		&& (*tokens)->token_type <= HEREDOC)
+		return (create_redir_node(tokens, placeholder));
+	while (*tokens && (*tokens)->next)
+	{
+		next_token = (*tokens)->next;
+		if ((*tokens)->next->token_type >= REDIRECTION_IN
+			&& (*tokens)->next->token_type <= HEREDOC)
+		{
+			red_node = new_ast_node((*tokens)->next->token_type);
+			(*tokens)->next = next_token->next->next;
+			red_node->left = parse_redirection(&placeholder);
+			red_node->right = create_file_node(next_token->next);
+			return (free(next_token->value), free(next_token), red_node);
+		}
+		*tokens = next_token;
+	}
+	return (parse_command(&placeholder));
+}
+
 t_ast_node	*parse_pipe(t_token **tokens)
 {
 	t_token		*placeholder;
@@ -59,7 +88,7 @@ t_ast_node	*parse_pipe(t_token **tokens)
 
 t_ast_node	*parse(t_token **tokens)
 {
-	if (tokens || !*tokens)
+	if (!tokens || !*tokens)
 		return (NULL);
 	return (parse_pipe(tokens));
 }
