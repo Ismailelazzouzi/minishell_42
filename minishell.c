@@ -31,6 +31,8 @@ void	main_loop(void)
 			add_history(input);
 		tokens = check_tokenize(input);
 		ast = parse(&tokens);
+		if (!ast)
+			printf("ast don't exists\n");
 	}
 }
 

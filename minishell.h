@@ -55,8 +55,14 @@ void	free_tokens(t_token *tokens);
 void	quote_status(char c, int *quoted, char *quote);
 // Parsing
 t_ast_node	*parse(t_token **tokens);
+t_ast_node	*parse_pipe(t_token **tokens);
+t_ast_node	*parse_redirection(t_token **tokens); // in progress
+t_ast_node	*create_file_node(t_token *token);
+t_ast_node	*parse_command(t_token **tokens);
 // Parsing utils
 t_ast_node *new_ast_node(t_typetoken type);
 void	free_ast(t_ast_node *node);
 int	count_args(t_token *current);
+t_ast_node	*create_redir_node(t_token **tokens, t_token *placeholder);
+void	fill_args(t_ast_node *node, t_token **tokens, int args_count);
 #endif
