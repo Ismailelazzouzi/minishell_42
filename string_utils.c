@@ -1,5 +1,47 @@
 #include "minishell.h"
 
+int	str_size(char *str, char end)
+{
+	int			a;
+
+	a = 0;
+	while (str && str[a] != '\0' && str[a] != end)
+		a += 1;
+	return (a);
+}
+
+int	array_str_count(char **arr)
+{
+	int			a;
+
+	a = 0;
+	while (arr[a] != 0)
+		a++;
+	return (a);
+}
+
+char	*rm_quotes(char *str, int s_q_c, int d_q_c, int a)
+{
+	char	*new_str;
+	int		b;
+
+	b = 0;
+	new_str = malloc(str_size(str, '\0') + 1);
+	while (str[a])
+	{
+		if (str[a] == 34 && !(s_q_c % 2))
+			d_q_c++;
+		else if (str[a] == 39 && !(d_q_c % 2))
+			s_q_c++;
+		if ((str[a] != 34 || si_q_c % 2)
+			&& ((str[a] != 39) || do_q_c % 2))
+			new_str[b++] = str[a];
+		a++;
+	}
+	new_str[b] = '\0';
+	return (new_str);
+}
+
 char	*strcopy(char *src)
 {
 	char	*dest;

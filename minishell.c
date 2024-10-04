@@ -96,7 +96,7 @@ int	main(int argc, char **argv, char **original_env)
 
 	if (argc == 1 && !argv[1])
 	{
-		//stat = init_shell_env(env, original_env);
+		stat = init_shell_env(env, original_env);
 		main_loop();
 	}
 }
