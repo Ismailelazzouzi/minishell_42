@@ -83,18 +83,20 @@ void	main_loop(void)
 		if (*input)
 			add_history(input);
 		tokens = check_tokenize(input);
-		if (!tokens)
-			printf("tokenization failed");
 		ast = parse(&tokens);
 		// if (ast)
 		// 	print_ast(ast);
 	}
 }
 
-int	main(int argc, char **argv)
+int	main(int argc, char **argv, char **original_env)
 {
+	t_env	*env;
+	int		stat;
+
 	if (argc == 1 && !argv[1])
 	{
+		//stat = init_shell_env(env, original_env);
 		main_loop();
 	}
 }

@@ -33,6 +33,12 @@ typedef struct	s_ast_node
 	struct s_ast_node	*right;
 } 	t_ast_node;
 
+typedef struct	s_env
+{
+	char	**original_env;
+	char	***parsed_env;
+}	t_env;
+
 // Input Validation I-V
 int		check_syntax_error(char *input);
 int		unclosed_quote(char *input);
