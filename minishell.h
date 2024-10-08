@@ -67,8 +67,23 @@ t_ast_node	*create_file_node(t_token *token);
 t_ast_node	*parse_command(t_token **tokens);
 // Parsing utils
 t_ast_node *new_ast_node(t_typetoken type);
-void	free_ast(t_ast_node *node);
-int	count_args(t_token *current);
+void		free_ast(t_ast_node *node);
+int			count_args(t_token *current);
 t_ast_node	*create_redir_node(t_token **tokens, t_token *placeholder);
-void	fill_args(t_ast_node *node, t_token **tokens, int args_count);
+void		fill_args(t_ast_node *node, t_token **tokens, int args_count);
+// Str utils
+int			str_size(char *str, char end);
+int			array_str_count(char **arr);
+char		*rm_quotes(char *str, int s_q_c, int d_q_c, int a);
+char		*strcopy(char *src);
+void		string_copy(char *s1, char *s2, int st, int en);
+int			ft_strcmp(char *s1, char *s2, char *s3);
+int			str_to_int(char *str);
+void		free_str_arr(char **arr);
+// Env
+
+// Utils
+int	count_digits(int number);
+void	free_env_var(char ***arr);
+void	cleanup_exit(t_env *env, int stat);
 #endif

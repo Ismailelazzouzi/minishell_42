@@ -33,8 +33,8 @@ char	*rm_quotes(char *str, int s_q_c, int d_q_c, int a)
 			d_q_c++;
 		else if (str[a] == 39 && !(d_q_c % 2))
 			s_q_c++;
-		if ((str[a] != 34 || si_q_c % 2)
-			&& ((str[a] != 39) || do_q_c % 2))
+		if ((str[a] != 34 || s_q_c % 2)
+			&& ((str[a] != 39) || d_q_c % 2))
 			new_str[b++] = str[a];
 		a++;
 	}

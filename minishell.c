@@ -92,11 +92,10 @@ void	main_loop(void)
 int	main(int argc, char **argv, char **original_env)
 {
 	t_env	*env;
-	int		stat;
 
-	if (argc == 1 && !argv[1])
+	env = malloc(sizeof(t_env));
+	if (argc == 1 && argv && original_env)
 	{
-		stat = init_shell_env(env, original_env);
 		main_loop();
 	}
 }

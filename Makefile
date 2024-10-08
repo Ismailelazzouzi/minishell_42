@@ -12,6 +12,9 @@ FILES = minishell \
 		tokenize_utils \
 		parse \
 		parser_utils \
+		utils \
+		string_utils \
+		string_utils1 \
 
 SRCS = $(addsuffix .c, $(FILES))
 
