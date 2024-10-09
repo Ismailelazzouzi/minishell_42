@@ -89,13 +89,26 @@ void	main_loop(void)
 	}
 }
 
+// void	print_env(char **original_env)
+// {
+// 	int	i;
+
+// 	i = 0;
+// 	while (original_env[i])
+// 	{
+// 		printf("%s\n", original_env[i]);
+// 		i++;
+// 	}
+// }
+
 int	main(int argc, char **argv, char **original_env)
 {
 	t_env	*env;
 
 	env = malloc(sizeof(t_env));
-	if (argc == 1 && argv && original_env)
+	if (argc == 1 && argv && original_env && env_var_init(env, original_env))
 	{
+		//print_env(env->parsed_env[1]);
 		main_loop();
 	}
 }

@@ -81,6 +81,9 @@ int			ft_strcmp(char *s1, char *s2, char *s3);
 int			str_to_int(char *str);
 void		free_str_arr(char **arr);
 // Env
+int	env_var_init(t_env *env, char **original_env);
+int	find_env_var(t_env *env, char *name);
+//void	update_stat(t_env *env, int stat, char *start);
 
 // Utils
 int	count_digits(int number);
