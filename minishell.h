@@ -83,7 +83,9 @@ void		free_str_arr(char **arr);
 // Env
 int	env_var_init(t_env *env, char **original_env);
 int	find_env_var(t_env *env, char *name);
-//void	update_stat(t_env *env, int stat, char *start);
+void	update_stat(t_env *env, int stat, char *start);
+//void	replace_env_var(char *var, t_env *env);
+//void	remove_env_place(t_env *env, int i);
 
 // Utils
 int	count_digits(int number);
