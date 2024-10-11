@@ -21,7 +21,7 @@ void	replace_env_var(char *var, t_env *env)
 	int		j;
 
 	i = str_size(var, '=');
-	var_env = malloc(c * sizeof(char));
+	var_env = malloc(i * sizeof(char));
 	if (!var_env)
 		return ;
 	string_copy(var_env, var, 0, i);
@@ -29,12 +29,12 @@ void	replace_env_var(char *var, t_env *env)
 	if (j >= 0)
 		remove_env_place(env, j);
 	free(var_env);
-	if (i > 0 && i < str_size(var, '\0') - 1);
-		//add_env_place(env, var, i, 1);
-	else if (var[c] == '=')
-		//add_env_place(env, var, i, 0);
-	else if (c == str_size(var, '\0'))
-		//add_env_place(env, var, i, -1);
+	if (i > 0 && i < str_size(var, '\0') - 1)
+		add_env_place(env, var, i, 1);
+	else if (var[i] == '=')
+		add_env_place(env, var, i, 0);
+	else if (i == str_size(var, '\0'))
+		add_env_place(env, var, i, -1);
 }
 
 void	update_stat(t_env *env, int stat, char *start)
@@ -43,7 +43,7 @@ void	update_stat(t_env *env, int stat, char *start)
 	int		i;
 
 	i = count_digits(stat);
-	var = malloc(a);
+	var = malloc(i);
 	if (!var)
 		return ;
 	string_copy(var, start, 0, str_size(start, '\0'));

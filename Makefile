@@ -17,6 +17,7 @@ FILES = minishell \
 		string_utils1 \
 		init_env_var \
 		env_handle \
+		env_handle1 \
 
 SRCS = $(addsuffix .c, $(FILES))
 

@@ -108,7 +108,6 @@ int	main(int argc, char **argv, char **original_env)
 	env = malloc(sizeof(t_env));
 	if (argc == 1 && argv && original_env && env_var_init(env, original_env))
 	{
-		//print_env(env->parsed_env[1]);
 		main_loop();
 	}
 }
