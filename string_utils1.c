@@ -1,16 +1,17 @@
 #include "minishell.h"
 
-int	ft_strcmp(char *s1, char *s2, char *s3)
+int	ft_strcmp(char *s_1, char *s_2, char *s_3)
 {
-	int	i;
+	int					a;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] != s2[i])
-		i++;
-	if (i == str_size(s1, '\0') && i == str_size(s2, '\0'))
+	a = 0;
+	while (s_1[a] && s_2[a] && s_1[a] == s_2[a])
+		a += 1;
+	if (a == str_size(s_1, '\0')
+		&& a == str_size(s_2, '\0'))
 		return (1);
-	if (s3)
-		return (ft_strcmp(s1, s3, NULL));
+	if (s_3)
+		return (ft_strcmp(s_1, s_3, NULL));
 	return (0);
 }
 

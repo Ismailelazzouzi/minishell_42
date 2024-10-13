@@ -116,6 +116,7 @@ void	handle_ctrl_c(int a);
 void	child_ctrl_c(int sig_num);
 // EXECUTION
 int echo_cmd(char **cmd, int *out_fd);
+int	ft_strcmp(char *s_1, char *s_2, char *s_3);
 int env_or_pwd_cmd(char *cmd, t_env *env, int c, int *out_fd);
 char **export_cmd(char **cmd, t_env *env, int *out_fd, int **s);
 char **unset_or_export_cmd(char **cmd, t_env *env, int *out_fd, int *s);
@@ -172,5 +173,7 @@ void	parent_fds_managment(int *_piped, int *_fd, int *fd_);
 void	close_pipe_ends(int fd1, int fd2);
 int here_doc_execution(char *delmtr, int * piped, t_env *env);
 char	**prepare_cmd_arguments(char *cmd, char **envp, int c);
+char	**merge_command_args(char **f_args, char **_cmd_);
+void	read_and_write(int std_out, char *limiter, t_env *env, int is_expandable);
 
 #endif

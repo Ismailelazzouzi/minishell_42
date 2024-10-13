@@ -1,5 +1,28 @@
 #include "minishell.h"
 
+int	is_space(char *line)
+{
+	int				a;
+
+	a = 0;
+	while (line[a] == ' ' || line[a] == '\t'
+		|| line[a] == '\n')
+		a += 1;
+	if (line[a] == '\0')
+		return (1);
+	return (0);
+}
+
+int	check_line(char **line)
+{
+	if (*line[0] == '\0' || ft_strcmp(*line, "\n", NULL) || is_space(*line))
+	{
+		free(*line);
+		return (1);
+	}
+	return (0);
+}
+
 char	*str_no_char(char *str, char del)
 {
 	int				a;

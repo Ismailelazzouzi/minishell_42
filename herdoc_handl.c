@@ -6,7 +6,7 @@ int str_comper(char *s1, char *s2, int max)
     a = 0;
     while(a < max && *s1 && *s2 && s1[a] == s2[a])
         a++;
-    if(sizeof_str(s1, '\0') == a && a == max)
+    if(str_size(s1, '\0') == a && a == max)
         return 1;
     return 0;
 }
@@ -34,28 +34,33 @@ int  is_there_quotes(char *s)
 }
 
 
-void read_and_write(int std_out, char *dlmtr, t_env *env, int is_expanded)
+void	read_and_write(int std_out, char *limiter, t_env *env, int is_expandable)
 {
-    char *buff;
-    int f_arr[3];
+	char							*buf;
+	//int								f_arr[3];
 
-    dlmtr = remove_quotes_from_str(dlmtr, 0,0,0);
-    while(1)
-    {
-        buff = readline(">> ");
-        if(!buff || str_comper(dlmtr, buff, sizeof_str(buff, '\n')))
-        {
-           //write(std_out, "a\n", 2);
-            free(buff);
-            break;
-        }
-       
-       // write(std_out, "b\n", 2);
-        write(std_out, buff, sizeof(buff, '\n'));
-        write(std_out, "\n", 1);
-        free(buff);
-    }
-    free(dlmtr);
+	limiter = rm_quotes(limiter, 0, 0, 0);
+	while (1)
+	{
+		buf = readline(">> ");
+		if (!buf || str_comper(limiter, buf, str_size(buf, '\n')))
+		{
+			free(buf);
+			break ;
+		}
+		if (is_expandable && env)
+		{
+			// buf[str_size(buf, '\n')] = '\0';
+			// ft_memset(f_arr, 0, 3 * sizeof(int));
+			// buf = recursively_expand_variables(buf, env, 0, f_arr);
+			// ft_memset(f_arr, 0, 3 * sizeof(int));
+			// buf = recursively_expand_variables(buf, env, 1, f_arr);
+		}
+		write(std_out, buf, str_size(buf, '\0'));
+		write(std_out, "\n", 1);
+		free(buf);
+	}
+	free(limiter);
 }
 
 int here_doc_execution(char *delmtr, int * piped, t_env *env)

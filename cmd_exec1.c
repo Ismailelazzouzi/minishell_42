@@ -11,7 +11,7 @@ int execute_basic_command(char **_cmd_, int *_fd, char **env, int *_piped)
 	signal(SIGQUIT, child_ctrl_c);
 	if (!pid)
 	{
-       printf("%s\n",_cmd_[0]);
+       //printf("%s\n",_cmd_[0]);
 		if (_piped[0] && _piped[0] <= _piped[5])
 			dup2(_fd[0], 0);
 		if (_piped[0] > 1)
@@ -77,7 +77,7 @@ cmd_args = merge_command_args(f_args, cmd);
         {
             status = execute_basic_command(cmd_args, fd, env->original_env,piped);
             printf("%d\n", status);
-            free_string_array(cmd_args);
+            //free_str_arr(cmd_args);
         }else
         {
         //  printf("f3\n");

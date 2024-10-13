@@ -85,7 +85,7 @@ void	remove_env_place(t_env *env, int i)
 	int	j;
 
 	j = 0;
-	while (env->parsed_env[j] != '\0')
+	while (env->parsed_env[j] != 0)
 		j++;
 	if (j > 0)
 	{

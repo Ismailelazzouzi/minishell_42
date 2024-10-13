@@ -4,7 +4,7 @@ void prepare_ast_nodes_to_execute(t_ast_node *head)
 {
 	if (head->type != TOKEN_WORD)
 	{
-        if(!head->file_type)
+        //if(!head->file_type)
 		    head->file_type = FILE_READY;
         // printf("p1\n");
 		if (head->type == TOKEN_REDIR_OUT && head->right)

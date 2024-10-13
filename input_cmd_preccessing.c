@@ -24,6 +24,6 @@ char	**merge_command_args(char **f_args, char **_cmd_)
 			new_args[a] = strcopy(_cmd_[a]);
 	}
 	new_args[a] = 0;
-	free_string_array(f_args);
+	free_str_arr(f_args);
 	return (new_args);
 }

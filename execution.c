@@ -15,7 +15,7 @@ int manage_piped_execution(t_ast_node * head,int *piped ,t_env *env, int *fd)
 		|| head->type == TOKEN_REDIR_APPEND
 		|| head->type == TOKEN_REDIR_HEREDOC)
         {
-         //  return(handle_redirections_cmd( head, piped, env, fd));
+            return(handle_redirections_cmd( head, piped, env, fd));
         }
     if(head->left)
         status = manage_piped_execution(head->left,piped, env, fd);

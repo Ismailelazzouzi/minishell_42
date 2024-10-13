@@ -4,8 +4,8 @@ CC = cc
 CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
 LIBFT = ./libft/libft.a
-READLINE_INCLUDE = /Users/isel-azz/.brew/opt/readline/include
-READLINE_LIB = /Users/isel-azz/.brew/opt/readline/lib
+READLINE_INCLUDE = $(shell brew --prefix readline)/include
+READLINE_LIB = $(shell brew --prefix readline)/lib
 
 FILES = minishell \
 		syntax_checker \
@@ -18,9 +18,9 @@ FILES = minishell \
 		string_utils \
 		string_utils1 \
 		init_env_var \
+		signal_fun \
 		env_handle \
 		env_handle1 \
-		signal_fun \
 		execution \
 		builtin_cmd \
 		builtin_cmd1 \
@@ -31,8 +31,8 @@ FILES = minishell \
 		cmand_exec_init \
 		cmd_exec_control \
 		cmd_exec1 \
-		heredoc_handl \
-		input_cmd_processing \
+		herdoc_handl \
+		input_cmd_preccessing \
 		path_utils \
 		path_utils2 \
 		process_pipes_managment \
