@@ -1,5 +1,34 @@
 #include "minishell.h"
 
+void	append_env(char *var, t_env *env)
+{
+	char	*env_var;
+	int		i;
+	int		j;
+	int		k;
+	int		l;
+
+	j = str_size(var, '+');
+	k = str_size(var, '\0') - j - 1;
+	env_var = malloc(j + 1);
+	string_copy(env_var, var, 0, j);
+	l = find_env_var(env, env_var);
+	free(env_var);
+	if (l >= 0)
+	{
+		i = str_size(env->original_env[k], '\0');
+		env_var = malloc(i + k + 1);
+		if (!env_var)
+			return ;
+		string_copy(env_var, env->original_env[l], 0, i);
+		string_copy(env_var + i, var, j + 2, str_size(var, '\0'));
+	}
+	else
+		env_var = str_no_char(var, '+');
+	replace_env_var(env_var, env);
+	free(env_var);
+}
+
 int	find_env_var(t_env *env, char *name)
 {
 	int	i;

@@ -39,7 +39,7 @@ void	add_word_token(char **start, char **input, t_token **tokens)
 		word = ft_strndup(*start, *input - *start);
 		if (word)
 		{
-			add_token(tokens, generate_token(WORD, word));
+			add_token(tokens, generate_token(TOKEN_WORD, word));
 			free(word);
 		}
 		else

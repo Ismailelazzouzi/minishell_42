@@ -1,5 +1,26 @@
 #include "minishell.h"
 
+char	*str_no_char(char *str, char del)
+{
+	int				a;
+	int				b;
+	char			*new_str;
+
+	a = 0;
+	b = 0;
+	new_str = malloc(str_size(str, '\0') + 1);
+	if (!new_str)
+		return (NULL);
+	while (str[a])
+	{
+		if (str[a] != del)
+			new_str[b++] = str[a];
+		a++;
+	}
+	new_str[b] = '\0';
+	return (new_str);
+}
+
 int	count_digits(int number)
 {
 	int	i;

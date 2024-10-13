@@ -69,23 +69,32 @@ t_token	*check_tokenize(char *input)
 // 		printf("right done !\n");
 // }
 
-void	main_loop(void)
+void	main_loop(t_env *env)
 {
 	char		*input;
 	t_token		*tokens;
 	t_ast_node	*ast;
+	int			stat;
 
 	while (1)
 	{
+		stat = 0;
 		input = readline("minishell> ");
 		if (!input)
 			break ;
-		if (*input)
-			add_history(input);
+		if (check_line(&input))
+			continue ;
+		add_history(input);
 		tokens = check_tokenize(input);
-		ast = parse(&tokens);
-		// if (ast)
-		// 	print_ast(ast);
+		if (!tokens)
+			stat = 258;
+		if (!stat)
+		{
+			ast = parse(&tokens);
+			manage_execution_commands(ast, env);
+			free_ast(ast);
+		}
+		update_stat(env, stat, "?=");
 	}
 }
 
@@ -105,9 +114,11 @@ int	main(int argc, char **argv, char **original_env)
 {
 	t_env	*env;
 
+	setup_signal_handlers();
 	env = malloc(sizeof(t_env));
 	if (argc == 1 && argv && original_env && env_var_init(env, original_env))
 	{
-		main_loop();
+		main_loop(env);
+		cleanup_exit(env, 0);
 	}
 }

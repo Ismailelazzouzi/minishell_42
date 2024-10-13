@@ -6,24 +6,24 @@ void	found_special_char(char **input, t_token **tokens)
 	{
 		if (*(*input + 1) == '>')
 		{
-			add_token(tokens, generate_token(REDIRECTION_APPEND, ">>"));
+			add_token(tokens, generate_token(TOKEN_REDIR_APPEND, ">>"));
 			(*input)++;
 		}
 		else
-			add_token(tokens, generate_token(REDIRECTION_OUT, ">"));
+			add_token(tokens, generate_token(TOKEN_REDIR_OUT, ">"));
 	}
 	else if (**input == '<')
 	{
 		if (*(*input + 1) == '<')
 		{
-			add_token(tokens, generate_token(HEREDOC, "<<"));
+			add_token(tokens, generate_token(TOKEN_REDIR_HEREDOC, "<<"));
 			(*input)++;
 		}
 		else
-			add_token(tokens, generate_token(REDIRECTION_IN, "<"));
+			add_token(tokens, generate_token(TOKEN_REDIR_IN, "<"));
 	}
 	else if (**input == '|')
-		add_token(tokens, generate_token(PIPE, "|"));
+		add_token(tokens, generate_token(TOKEN_PIPE, "|"));
 	(*input)++;
 }
 

@@ -5,7 +5,7 @@ t_ast_node	*parse_command(t_token **tokens)
 	t_ast_node	*command_node;
 	int			args_count;
 
-	command_node = new_ast_node(WORD);
+	command_node = new_ast_node(TOKEN_WORD);
 	args_count = count_args((*tokens));
 	command_node->args = malloc((args_count + 1) * sizeof(char *));
 	if (!command_node->args)
@@ -41,14 +41,14 @@ t_ast_node	*parse_redirection(t_token **tokens)
 	if (!*tokens)
 		return (NULL);
 	placeholder = *tokens;
-	if ((*tokens)->token_type >= REDIRECTION_IN
-		&& (*tokens)->token_type <= HEREDOC)
+	if ((*tokens)->token_type >= TOKEN_REDIR_IN
+		&& (*tokens)->token_type <= TOKEN_REDIR_HEREDOC)
 		return (create_redir_node(tokens, placeholder));
 	while (*tokens && (*tokens)->next)
 	{
 		next_token = (*tokens)->next;
-		if ((*tokens)->next->token_type >= REDIRECTION_IN
-			&& (*tokens)->next->token_type <= HEREDOC)
+		if ((*tokens)->next->token_type >= TOKEN_REDIR_IN
+			&& (*tokens)->next->token_type <= TOKEN_REDIR_HEREDOC)
 		{
 			red_node = new_ast_node((*tokens)->next->token_type);
 			(*tokens)->next = next_token->next->next;
@@ -71,7 +71,7 @@ t_ast_node	*parse_pipe(t_token **tokens)
 	while (*tokens && (*tokens)->next)
 	{
 		next_token = (*tokens)->next;
-		if ((*tokens)->next->token_type == PIPE)
+		if ((*tokens)->next->token_type == TOKEN_PIPE)
 		{
 			pipe_node = new_ast_node((*tokens)->next->token_type);
 			(*tokens)->next = NULL;

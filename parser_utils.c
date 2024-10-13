@@ -32,7 +32,7 @@ int	count_args(t_token *current)
 	int	count;
 
 	count = 0;
-	while (current && current->token_type == WORD)
+	while (current && current->token_type == TOKEN_WORD)
 	{
 		count++;
 		current = current->next;
@@ -65,9 +65,9 @@ void	free_ast(t_ast_node *node)
 	i = 0;
 	if (!node)
 		return ;
-	if (node->type == WORD)
+	if (node->type == TOKEN_WORD)
 	{
-		while (node->type == WORD && node->args)
+		while (node->type == TOKEN_WORD && node->args)
 			free(node->args[i++]);
 		free(node->args);
 	}

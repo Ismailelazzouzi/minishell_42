@@ -6,15 +6,26 @@
 # include <stdlib.h>
 # include <string.h>
 # include "./libft/libft.h"
+# include <fcntl.h>
+# include <errno.h>
+
+int	g_var_tn;
+
+# define READ_FILE 10
+# define READ_FROM_APPEND 15
+# define WRITE_FILE 20
+# define WRITE_FILE_APPEND 30
+# define EXECUTE_FILE 40
+# define FILE_READY 50
 
 typedef enum e_typetoken
 {
-	WORD,
-	PIPE,
-	REDIRECTION_IN,
-	REDIRECTION_OUT,
-	REDIRECTION_APPEND,
-	HEREDOC
+	TOKEN_WORD,
+	TOKEN_PIPE,
+	TOKEN_REDIR_IN,
+	TOKEN_REDIR_OUT,
+	TOKEN_REDIR_APPEND,
+	TOKEN_REDIR_HEREDOC
 }	t_typetoken;
 
 typedef struct s_token
@@ -81,7 +92,7 @@ int			ft_strcmp(char *s1, char *s2, char *s3);
 int			str_to_int(char *str);
 void		free_str_arr(char **arr);
 // Env
-//int	env_var_init(t_env *env, char **original_env);
+int	env_var_init(t_env *env, char **original_env);
 int	find_env_var(t_env *env, char *name);
 void	update_stat(t_env *env, int stat, char *start);
 void	replace_env_var(char *var, t_env *env);
@@ -90,9 +101,76 @@ void	add_env_place(t_env *env, char *var, int i, int flag);
 char	**copy_without_index(char **original_env, int j, int k, int l);
 char	***duplicate_env_struct(t_env *env, int j, int k, int l);
 void	update_index_val(t_env *env, char *var, int j, int flag);
+void	append_env(char *var, t_env *env);
 
 // Utils
 int	count_digits(int number);
 void	free_env_var(char ***arr);
 void	cleanup_exit(t_env *env, int stat);
+int	is_space(char *line);
+int	check_line(char **line);
+char	*str_no_char(char *str, char del);
+// SIGNALS
+void	setup_signal_handlers(void);
+void	handle_ctrl_c(int a);
+void	child_ctrl_c(int sig_num);
+// EXECUTION
+int echo_cmd(char **cmd, int *out_fd);
+int env_or_pwd_cmd(char *cmd, t_env *env, int c, int *out_fd);
+char **export_cmd(char **cmd, t_env *env, int *out_fd, int **s);
+char **unset_or_export_cmd(char **cmd, t_env *env, int *out_fd, int *s);
+int cd_cmd(char **cmd, t_env *env, int *out_fd);
+void set_new_pwd_in_env(char *new, t_env *env, int c);
+int change_current_directory(char *path, t_env *env);
+char *get_current_working_directory(int size, int tries, int fd);
+char	***sort_tha_array(char ***_array, int _si);
+void print_export_declaration_to_fd(t_env *env, int *out_fd);
+void	print_env_var_to_fd(char *str_1, char *str_2, int fd);
+void	print_export_vars(char ***arr, int a, int fd);
+int	string_weight_compare(char *s_1, char *s_2);
+int	check_array_arrangment(char ***array, int _si);
+int is_valid_echo_paran(char *s);
+void	__exit(char **_cmd_);
+int export_print_or_export(char **cmd);
+int export_statment_check(char *cmd);
+int simple_child_in_builtin(char **cmd,int *fd, t_env *env, int *piped);
+void builtin_exec_and_exit(char **cmd, t_env *env, int *out_fd, int *piped);
+int child_redirection(char **cmd, int *fd, t_env *env, int *piped);
+int manage_bultin_exec(char **cmd, int *fd, t_env *env, int *piped);
+int	execute_builtin_with_piping(char **_cmd_, int *_fd, t_env *env, int *_piped);
+int builtin_with_simple_piping_exec(char **cmd, int *fd,t_env *env , int *piped);
+int simple_builtin_execution_managment(char **cmd, int * fd,t_env *env, int *piped);
+void prepare_ast_nodes_to_execute(t_ast_node *head);
+void count_red_and_pipes(t_ast_node *head, int *piped);
+void init_or_reset_pipe_state(int *piped, int f);
+int switch_fds_id(int *_piped, int index, int index_2, int con);
+int file_to_redirection_open(t_ast_node *head, int *_piped, t_env *env, int status);
+int check_builtin_cmd(char *cmd);
+int builtin_cmd_exec_in_child(char **cmd, t_env *env, int *out_fd, int *piped);
+int execute_basic_command(char **_cmd_, int *_fd, char **env, int *_piped);
+int	execute_command_with_redirection(char **_cmd_, int *_fd, char **env, int *_piped);
+int preparation_to_exexcute_command(char **cmd, int *fd, int *piped, t_env *env);
+int	wait_for_children(int status, int *_piped);
+int manage_piped_execution(t_ast_node * head,int *piped ,t_env *env, int *fd);
+int handle_redirections_cmd(t_ast_node *head, int *piped, t_env *env, int *fd);
+int ast_node_execution(t_ast_node *head, int *piped, t_env *env);
+void manage_execution_commands(t_ast_node *head, t_env *env);
+int str_comper(char *s1, char *s2, int max);
+int	is_string_numeric(char *s_1);
+void exite_herdoc(int a);
+int  is_there_quotes(char *s);
+char *create_subpath_from_var(char *env_v, char *f, int *indx);
+char *verify_path_without_env(char *f, int mode);
+char	*fetch_file_path(char *file, char **envp, char *env_var, int mode);
+char	*find_next_substring(char *str, char del, int *index);
+int find_substr_index(char **haystack, char *needle, int n);
+int is_path_accessible(char *path, int mode);
+void increment_path_index(char *env_v, int *indx, int *a);
+int count_substrings(char *s, char del);
+void	child_fds_managment(int *_piped, int *_fd, int *fd_);
+void	parent_fds_managment(int *_piped, int *_fd, int *fd_);
+void	close_pipe_ends(int fd1, int fd2);
+int here_doc_execution(char *delmtr, int * piped, t_env *env);
+char	**prepare_cmd_arguments(char *cmd, char **envp, int c);
+
 #endif
