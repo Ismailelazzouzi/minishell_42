@@ -21,6 +21,8 @@ FILES = minishell \
 		manage_env \
 		manage_env1 \
 		manage_env2 \
+		expand_env \
+		expand_env1 \
 		signal_fun \
 		execution \
 		builtin_cmd \

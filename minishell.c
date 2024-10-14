@@ -92,7 +92,7 @@ void	main_loop(t_env *env)
 		{
 			ast = parse(&tokens);
 			manage_execution_commands(ast, env);
-			//free_ast(ast);
+			free_ast(ast);
 		}
 		update_env_status(env, stat, "?=");
 	}

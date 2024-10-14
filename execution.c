@@ -106,7 +106,7 @@ void manage_execution_commands(t_ast_node *head, t_env *env)
     count_red_and_pipes(head, piped);
     init_or_reset_pipe_state(piped,0);
     prepare_ast_nodes_to_execute(head);
-    //status = expand_variables_in_ast(head, env);
+    expand_variables_in_ast(head, env);
     // display_ast(head, 0);
     // printf("%d\n",piped[4]);
    //piped[10] += 1;

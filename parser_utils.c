@@ -60,15 +60,18 @@ void	fill_args(t_ast_node *node, t_token **tokens, int args_count)
 
 void	free_ast(t_ast_node *node)
 {
-	int	i;
+	int				i;
 
 	i = 0;
 	if (!node)
 		return ;
-	if (node->type == TOKEN_WORD)
+	if (node->type == TOKEN_WORD && node->args)
 	{
-		while (node->type == TOKEN_WORD && node->args)
-			free(node->args[i++]);
+		while (node->args && node->args[i])
+		{
+			free(node->args[i]);
+			i++;
+		}
 		free(node->args);
 	}
 	free_ast(node->left);
