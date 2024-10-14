@@ -94,7 +94,7 @@ void	main_loop(t_env *env)
 			manage_execution_commands(ast, env);
 			//free_ast(ast);
 		}
-		//update_stat(env, stat, "?=");
+		update_env_status(env, stat, "?=");
 	}
 }
 
@@ -116,7 +116,7 @@ int	main(int argc, char **argv, char **original_env)
 
 	setup_signal_handlers();
 	env = malloc(sizeof(t_env));
-	if (argc == 1 && argv && original_env && env_var_init(env, original_env))
+	if (argc == 1 && argv && original_env && shell_initializing_with_env(env, original_env))
 	{
 		main_loop(env);
 		cleanup_exit(env, 0);

@@ -68,7 +68,7 @@ char **export_cmd(char **cmd, t_env *env, int *out_fd, int **s)
         if(b > 0)
         {
             if(b >= 1 && cmd[a][b] == '+')
-                append_env(cmd[a], env);
+                append_env_var(cmd[a], env);
             else
                 replace_env_var(cmd[a], env);
         }
@@ -98,13 +98,13 @@ char **unset_or_export_cmd(char **cmd, t_env *env, int *out_fd, int *s)
 		//write(out_fd[1],env->parsed_env[30][0],2);
         while(cmd[a])
         {
-            c= find_env_var(env, cmd[a]);
+            c= find_env_var_index(env, cmd[a]);
 			//	write(out_fd[1],"test\n",5);
 			
             if(c >= 0)
 			{
 				//write(out_fd[1],"test2\n",6);
-                remove_env_place(env, c);
+                remove_env_entry(env, c);
 			}
             else 
                 *s =256;
@@ -132,9 +132,9 @@ int cd_cmd(char **cmd, t_env *env, int *out_fd)
         if(change_current_directory(cmd[1], env) < 0)
             ft_putendl_fd("err:cd():Only EXISTING destination", out_fd[1]);
         else{
-            a = find_env_var(env,"PWD");
+            a = find_env_var_index(env,"PWD");
             if(a >= 0)
-                remove_env_place(env, a);
+                remove_env_entry(env, a);
             new_path = get_current_working_directory(100, 5, out_fd[1]);
             if(new_path)
             {

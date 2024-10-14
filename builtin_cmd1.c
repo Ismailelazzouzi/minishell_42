@@ -33,7 +33,7 @@ int change_current_directory(char *path, t_env *env)
 
     if(!path || !sizeof(path, '\0'))
     {
-        a = find_env_var(env, "HOME");
+        a = find_env_var_index(env, "HOME");
         if(a >=0)
             status = chdir(env->parsed_env[a][1]);
         else
@@ -98,7 +98,7 @@ void print_export_declaration_to_fd(t_env *env, int *out_fd)
 		a++;
 	if(!a)
 		return ;
-	new_arr = duplicate_env_struct(env, a, 'F', -1);
+	new_arr = duplicate_env_structure(env, a, 'F', -1);
 	new_arr[a] = 0;
 	new_arr= sort_tha_array(new_arr, a);
 	print_export_vars(new_arr, a, out_fd[1]);

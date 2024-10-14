@@ -37,18 +37,38 @@ int env_structer_shell_initializing(t_env *env, char **original_env, int a)
     b = -1;
     while(++b < a)
     {
-        c = sizeof_str(original_env[b], '=');
+        c = str_size(original_env[b], '=');
         env->parsed_env[b] = malloc(2 * sizeof(char **));
         env->parsed_env[b][0] = malloc(c * sizeof(char *));
-        env->parsed_env[b][1] = malloc((sizeof_str(original_env[b], '\0') - c)* sizeof(char *));
+        env->parsed_env[b][1] = malloc((str_size(original_env[b], '\0') - c)* sizeof(char *));
         if(!env->parsed_env[b] || !env->parsed_env[b][0] || !env->parsed_env[b][1])
         return 0;
-        s_strcopy(env->parsed_env[b][0], original_env[b], 0, c);
-       s_strcopy(env->parsed_env[b][1], original_env[b], c+1, sizeof_str(original_env[b],'\0'));
+        string_copy(env->parsed_env[b][0], original_env[b], 0, c);
+        string_copy(env->parsed_env[b][1], original_env[b], c+1, str_size(original_env[b],'\0'));
     }
     return (env->parsed_env[b] =0,1);
 }  
 
+
+void	initialize_default_variables(t_env *env, int a)
+{
+	char					*new_pwd;
+
+	a = find_env_var_index(env, "SHELL");
+	if (a >= 0)
+		remove_env_entry(env, a);
+	replace_env_var("SHELL=minishell", env);
+	replace_env_var("?=0", env);
+	a = find_env_var_index(env, "PWD");
+	new_pwd = get_current_working_directory(100, 5, 2);
+	if (new_pwd)
+	{
+		if (a >= 0)
+			remove_env_entry(env, a);
+		set_new_pwd_in_env(new_pwd, env, a);
+		free(new_pwd);
+	}
+}
 
 int shell_initializing_with_env(t_env *env, char **original_env)
 {
@@ -63,9 +83,9 @@ int shell_initializing_with_env(t_env *env, char **original_env)
     a = find_env_var_index(env, "SHLVL");
     index = 0;
     if(a >= 0)
-        index = string_to_int(env->parsed_env[a][1]);
-    
-
+        index = str_to_int(env->parsed_env[a][1]);
+    update_env_status(env, index + 1, "SHLVL=");
+	initialize_default_variables(env, 0);
     return(status);
 
 }

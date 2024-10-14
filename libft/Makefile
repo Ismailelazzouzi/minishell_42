@@ -41,6 +41,7 @@ FILES = ft_memset \
 		ft_putnbr_fd \
 		ft_strndup \
 		ft_strnlen \
+		ft_isspace \
 
 BFILES = ft_lstnew_bonus \
 		 ft_lstadd_front_bonus \

@@ -92,16 +92,21 @@ int			ft_strcmp(char *s1, char *s2, char *s3);
 int			str_to_int(char *str);
 void		free_str_arr(char **arr);
 // Env
-int	env_var_init(t_env *env, char **original_env);
-int	find_env_var(t_env *env, char *name);
-void	update_stat(t_env *env, int stat, char *start);
+int shell_initializing_with_env(t_env *env, char **original_env);
+void	initialize_default_variables(t_env *env, int a);
+int env_structer_shell_initializing(t_env *env, char **original_env, int a);
+char **duplicate_env_varibles(char **env);
+int	is_valid_variable_start(char *str, int index, int con);
+void	append_env_var(char *var, t_env *env);
+int	find_env_var_index(t_env *env, char *name);
+void	add_env_entry(t_env *env, char *cmd, int b, int con);
+void	update_env_value_at_index(t_env *env, char *cmd, int a, int con);
+void	remove_env_entry(t_env *env, int c);
+char	***duplicate_env_structure(t_env *env, int a, int a_2, int d);
+char	**copy_env_exclude_index(char **env, int a, int a_2, int d);
 void	replace_env_var(char *var, t_env *env);
-void	remove_env_place(t_env *env, int i);
-void	add_env_place(t_env *env, char *var, int i, int flag);
-char	**copy_without_index(char **original_env, int j, int k, int l);
-char	***duplicate_env_struct(t_env *env, int j, int k, int l);
-void	update_index_val(t_env *env, char *var, int j, int flag);
-void	append_env(char *var, t_env *env);
+void	update_env_status(t_env *env, int status, char *start);
+char	*str_without_char(char *str, char del);
 
 // Utils
 int	count_digits(int number);

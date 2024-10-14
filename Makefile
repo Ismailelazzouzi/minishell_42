@@ -17,10 +17,11 @@ FILES = minishell \
 		utils \
 		string_utils \
 		string_utils1 \
-		init_env_var \
+		env_init \
+		manage_env \
+		manage_env1 \
+		manage_env2 \
 		signal_fun \
-		env_handle \
-		env_handle1 \
 		execution \
 		builtin_cmd \
 		builtin_cmd1 \

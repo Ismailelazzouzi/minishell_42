@@ -111,7 +111,7 @@ void manage_execution_commands(t_ast_node *head, t_env *env)
     // printf("%d\n",piped[4]);
    //piped[10] += 1;
    //if (status)
-        ast_node_execution(head,piped,env);
+    ast_node_execution(head,piped,env);
 //    wait_for_children(status,piped);
    //wait(NULL);
 }
