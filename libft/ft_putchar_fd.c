@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isel-azz <isel-azz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:57:00 by isel-azz          #+#    #+#             */
-/*   Updated: 2023/11/26 13:02:29 by isel-azz         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:33:57 by sel-moud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,5 @@
 
 void	ft_putchar_fd(char c, int fd)
 {
-	if (fd > 0)
-		write(fd, &c, 1);
+	write(fd, &c, 1);
 }

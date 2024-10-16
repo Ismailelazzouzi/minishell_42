@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   signal_fun.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-azz <isel-azz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 00:22:45 by isel-azz          #+#    #+#             */
+/*   Updated: 2024/10/16 00:22:46 by isel-azz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	setup_signal_handlers(void)
@@ -16,8 +28,6 @@ void	handle_ctrl_c(int a)
 	rl_redisplay();
 }
 
-
-
 void	child_ctrl_c(int sig_num)
 {
 	if (sig_num == 2)
@@ -28,4 +38,4 @@ void	child_ctrl_c(int sig_num)
 		g_var_tn = 131;
 	}
 	write(1, "\n", 1);
-} 
+}

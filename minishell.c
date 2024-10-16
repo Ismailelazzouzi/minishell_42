@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   minishell.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-azz <isel-azz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 00:22:30 by isel-azz          #+#    #+#             */
+/*   Updated: 2024/10/16 01:21:52 by isel-azz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_token	*check_tokenize(char *input)
@@ -15,59 +27,6 @@ t_token	*check_tokenize(char *input)
 	free(trimmed_input);
 	return (tokens);
 }
-
-// void	print_args(char **args)
-// {
-// 	while (*args)
-// 	{
-// 		printf("arg = %s\n", *args);
-// 		args++;
-// 	}
-// }
-
-// void	print_ast_type(t_ast_node *ast)
-// {
-// 		if (ast->type == WORD)
-// 			printf("WORD");
-// 		else if (ast->type == PIPE)
-// 			printf("PIPE");
-// 		else if (ast->type == REDIRECTION_IN)
-// 			printf("REDIRECTION_IN");
-// 		else if (ast->type == REDIRECTION_OUT)
-// 			printf("REDIRECTION_OUT");
-// 		else if (ast->type == REDIRECTION_APPEND)
-// 			printf("REDIRECTION_APPEND");
-// 		else if (ast->type == HEREDOC)
-// 			printf("HEREDOC");
-// 		printf("\n");
-// }
-
-// void	print_ast(t_ast_node *ast)
-// {
-// 	t_ast_node	*ast_left;
-// 	t_ast_node	*ast_right;
-
-// 	printf("head = ");
-// 	print_ast_type(ast);
-// 	if (ast->args)
-// 		print_args(ast->args);
-// 	ast_right = ast->right;
-// 	ast_left = ast->left;
-// 	if (ast_left)
-// 	{
-// 		printf("left\n");
-// 		print_ast(ast_left);
-// 	}
-// 	else
-// 		printf("left done !\n");
-// 	if (ast_right)
-// 	{
-// 		printf("right\n");
-// 		print_ast(ast_right);
-// 	}
-// 	else
-// 		printf("right done !\n");
-// }
 
 void	main_loop(t_env *env)
 {
@@ -91,24 +50,12 @@ void	main_loop(t_env *env)
 		if (!stat)
 		{
 			ast = parse(&tokens);
-			manage_execution_commands(ast, env);
+			manage_execution_commands(ast, env, &stat);
 			free_ast(ast);
 		}
 		update_env_status(env, stat, "?=");
 	}
 }
-
-// void	print_env(char **original_env)
-// {
-// 	int	i;
-
-// 	i = 0;
-// 	while (original_env[i])
-// 	{
-// 		printf("%s\n", original_env[i]);
-// 		i++;
-// 	}
-// }
 
 int	main(int argc, char **argv, char **original_env)
 {
@@ -116,7 +63,8 @@ int	main(int argc, char **argv, char **original_env)
 
 	setup_signal_handlers();
 	env = malloc(sizeof(t_env));
-	if (argc == 1 && argv && original_env && shell_initializing_with_env(env, original_env))
+	if (argc == 1 && argv && original_env 
+		&& shell_initializing_with_env(env, original_env))
 	{
 		main_loop(env);
 		cleanup_exit(env, 0);

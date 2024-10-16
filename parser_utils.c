@@ -1,6 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-azz <isel-azz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 00:22:35 by isel-azz          #+#    #+#             */
+/*   Updated: 2024/10/16 00:22:36 by isel-azz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
-t_ast_node *new_ast_node(t_typetoken type)
+t_ast_node	*new_ast_node(t_typetoken type)
 {
 	t_ast_node	*new_node;
 

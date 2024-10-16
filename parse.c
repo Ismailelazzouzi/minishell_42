@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-azz <isel-azz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 00:22:33 by isel-azz          #+#    #+#             */
+/*   Updated: 2024/10/16 00:22:34 by isel-azz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 t_ast_node	*parse_command(t_token **tokens)
@@ -24,11 +36,12 @@ t_ast_node	*create_file_node(t_token *token)
 	file_node->type = token->token_type;
 	file_node->args = malloc(2 * sizeof(char *));
 	if (!file_node->args)
-		return (free(file_node), NULL);\
+		return (free(file_node), NULL);
 	file_node->args[0] = token->value;
 	file_node->args[1] = NULL;
 	file_node->left = NULL;
 	file_node->right = NULL;
+	free(token);
 	return (file_node);
 }
 

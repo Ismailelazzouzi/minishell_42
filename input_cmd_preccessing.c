@@ -1,9 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   input_cmd_preccessing.c                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/15 19:47:10 by sel-moud          #+#    #+#             */
+/*   Updated: 2024/10/15 23:58:03 by sel-moud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 char	**merge_command_args(char **f_args, char **_cmd_)
 {
-	int				a;
-	char			**new_args;
+	int		a;
+	char	**new_args;
 
 	if (!f_args)
 		return (NULL);

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   string_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: isel-azz <isel-azz@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/16 00:22:48 by isel-azz          #+#    #+#             */
+/*   Updated: 2024/10/16 00:22:49 by isel-azz         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 int	str_size(char *str, char end)
@@ -39,7 +51,7 @@ char	*rm_quotes(char *str, int s_q_c, int d_q_c, int a)
 		a++;
 	}
 	new_str[b] = '\0';
-	return (new_str);
+	return (free(str), new_str);
 }
 
 char	*strcopy(char *src)

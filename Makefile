@@ -39,6 +39,7 @@ FILES = minishell \
 		path_utils \
 		path_utils2 \
 		process_pipes_managment \
+		shell_utils \
 
 SRCS = $(addsuffix .c, $(FILES))
 

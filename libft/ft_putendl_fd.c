@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_putendl_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: isel-azz <isel-azz@student.42.fr>          +#+  +:+       +#+        */
+/*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/12 18:58:19 by isel-azz          #+#    #+#             */
-/*   Updated: 2023/11/26 13:04:28 by isel-azz         ###   ########.fr       */
+/*   Updated: 2024/10/15 19:33:51 by sel-moud         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,6 @@
 
 void	ft_putendl_fd(char *s, int fd)
 {
-	if (fd > 0)
-	{
-		ft_putstr_fd(s, fd);
-		write (fd, "\n", 1);
-	}
+	ft_putstr_fd(s, fd);
+	write (fd, "\n", 1);
 }

@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   builtin_cmd2.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: sel-moud <sel-moud@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2024/10/15 19:46:23 by sel-moud          #+#    #+#             */
+/*   Updated: 2024/10/15 19:48:45 by sel-moud         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 void	print_env_var_to_fd(char *str_1, char *str_2, int fd)
 {
-	if (!ft_strcmp(str_1, "?", NULL)
-		&& !ft_strcmp(str_2, "F1", NULL))
+	if (!ft_strcmp(str_1, "?", NULL) && !ft_strcmp(str_2, "F1", NULL))
 	{
 		ft_putstr_fd(str_1, fd);
 		ft_putstr_fd("=", fd);
@@ -12,6 +23,7 @@ void	print_env_var_to_fd(char *str_1, char *str_2, int fd)
 		write(fd, "\n", 1);
 	}
 }
+
 void	print_export_vars(char ***arr, int a, int fd)
 {
 	while (a--)
@@ -35,7 +47,7 @@ void	print_export_vars(char ***arr, int a, int fd)
 
 int	string_weight_compare(char *s_1, char *s_2)
 {
-	int					a;
+	int	a;
 
 	a = 0;
 	while (s_1[a] && s_2[a])
@@ -55,9 +67,9 @@ int	string_weight_compare(char *s_1, char *s_2)
 
 int	check_array_arrangment(char ***array, int _si)
 {
-	int					a;
-	int					b;
-	int					c;
+	int	a;
+	int	b;
+	int	c;
 
 	a = 0;
 	while (a < _si - 1)
@@ -75,19 +87,20 @@ int	check_array_arrangment(char ***array, int _si)
 	return (1);
 }
 
-int is_valid_echo_paran(char *s)
+int	is_valid_echo_paran(char *s)
 {
-    int a;
-    a = 0;
-    if(s && s[a] && s[a] == '-')
-    {
-        while(s[++a])
-        {
-            if(s[a] != 'n')
-                return 0;
-        }
-    }
-    else
-        return 0;
-    return 1;
+	int	a;
+
+	a = 0;
+	if (s && s[a] && s[a] == '-')
+	{
+		while (s[++a])
+		{
+			if (s[a] != 'n')
+				return (0);
+		}
+	}
+	else
+		return (0);
+	return (1);
 }
